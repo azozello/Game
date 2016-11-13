@@ -22,19 +22,19 @@
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button1.1" />
+                android:id="@+id/button1" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button1.2" />
+                android:id="@+id/button2" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button1.3" />
+                android:id="@+id/button3" />
         </TableRow>
 
         <TableRow
@@ -45,19 +45,19 @@
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button2.1" />
+                android:id="@+id/button4" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button2.2" />
+                android:id="@+id/button5" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button2.3" />
+                android:id="@+id/button6" />
         </TableRow>
 
         <TableRow
@@ -68,19 +68,19 @@
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button3.1" />
+                android:id="@+id/button7" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button3.2" />
+                android:id="@+id/button8" />
 
             <Button
                 android:textSize="50sp"
                 android:layout_width="100sp"
                 android:layout_height="100sp"
-                android:id="@+id/button3.3" />
+                android:id="@+id/button9" />
         </TableRow>
 
     </TableLayout>

@@ -2,37 +2,45 @@ package contextmenu.develop.startandroid.ru.nc;
 
 
 public class Vector {
+    Coordinate[] coordinates = new Coordinate[3];
 
-    Coordinate x,y,z;
-
-    public Vector(Coordinate x, Coordinate y, Coordinate z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-    public boolean contains(Coordinate coordinate){
-        if (x.equals(coordinate)) return true;
-        else if (y.equals(coordinate)) return true;
-        else if (z.equals(coordinate)) return true;
-        else return false;
+    public Vector(Coordinate coordinate1, Coordinate coordinate2, Coordinate coordinate3) {
+        this.coordinates[0] = coordinate1;
+        this.coordinates[1] = coordinate2;
+        this.coordinates[2] = coordinate3;
     }
 
     public boolean isFull(){
-        if (x.getValue()!=0 && y.getValue()!=0 && z.getValue()!=0) return true;
-        else return false;
+        for (int i=0;i<coordinates.length;i++){
+            if (coordinates[i].getCValue()==0) return false;
+        }
+        return true;
     }
+
     public boolean isWin(){
-        int flag = x.getValue()+y.getValue()+z.getValue();
-        if (flag==3 || flag==6) return true;
-        else return false;
+        int temp = coordinates[0].getCValue();
+        if (temp==0) return false;
+        else {
+            for (int i = 0; i < coordinates.length; i++) {
+                if (coordinates[i].getCValue() != temp) return false;
+            }
+            return true;
+        }
     }
-    public Coordinate getX() {
-        return x;
+
+    public int toWin(){
+        int win = 0;
+        for (int i = 0; i < coordinates.length; i++) {
+            if (coordinates[i].getCValue()==1) win++;
+        }
+        return win;
     }
-    public Coordinate getY() {
-        return y;
-    }
-    public Coordinate getZ() {
-        return z;
+
+    public int toLose(){
+        int lose = 0;
+        for (int i = 0; i < coordinates.length; i++) {
+            if (coordinates[i].getCValue()==2) lose++;
+        }
+        return lose;
     }
 }

@@ -2,24 +2,19 @@ package contextmenu.develop.startandroid.ru.nc;
 
 import android.widget.Button;
 
-import static contextmenu.develop.startandroid.ru.nc.MainActivity.field;
 
-public class Coordinate {
+class Coordinate {
 
     private Button button;
-    int x,y;
-    int value;
+    private int value;
 
-    public Coordinate(Button button, int line, int column) {
+    public Coordinate(Button button) {
         this.button = button;
-        this.x = line;
-        this.y = column;
-        this.value = field[x][y];
+        this.value = 0;
     }
 
-    public void setCoord(int value){
+    public void setValue(int value){
         this.value = value;
-        field[x][y] = value;
         switch (value){
             case 0:
                 this.button.setText("");
@@ -33,14 +28,7 @@ public class Coordinate {
         }
     }
 
-    public int getX() {
-        return x;
+    public int getCValue() {
+        return this.value;
     }
-    public int getY() {
-        return y;
-    }
-    public int getValue() {
-        return value;
-    }
-
 }
