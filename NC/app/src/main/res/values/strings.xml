@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NC</string>
+    <string name="N_G">New Game</string>
+    <string name="C">Cancel</string>
 </resources>
