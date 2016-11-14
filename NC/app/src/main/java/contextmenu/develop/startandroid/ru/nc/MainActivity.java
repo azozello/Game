@@ -205,10 +205,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     public void check(){
         boolean flag = true;
-        for (Vector vector : vectors){
-            if (!vector.isFull()){
+        for (Vector vector : vectors) {
+            if (!vector.isFull()) {
                 flag = false;
             }
+        }
+        for (Vector vector : vectors){
             if (vector.isWin()) {
                 showDialog(WIN_DIALOG);
                 break;
