@@ -167,7 +167,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void step(){
-        StringBuilder testToast = new StringBuilder();
 
         ArrayList<Coordinate> activeCoordinates = new ArrayList<>();
         ArrayList<Vector> activeVectors = new ArrayList<>();
@@ -183,14 +182,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     if (!vector.isFull()){
                         if (vector.contains(coordinate)){
                             activeVectors.add(vector);
-                            testToast.append(vector.toString()+"| ");
                         }
                     }
                 }
             }
         }
-
-        Toast.makeText(this,testToast.toString(),Toast.LENGTH_SHORT).show();
 
         for (Vector vector : activeVectors){
             if (vector.toLose()>1 || vector.toWin()>1){
@@ -198,14 +194,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 return;
             }
         }
+
+        for (Vector vector : activeVectors){
+            if (vector.containsX()){
+                vector.setEmpty();
+                return;
+            }
+        }
     }
 
     public void check(){
+        boolean flag = true;
         for (Vector vector : vectors){
+            if (!vector.isFull()){
+                flag = false;
+            }
             if (vector.isWin()) {
                 showDialog(WIN_DIALOG);
                 break;
             }
+        }
+        if (flag){
+            setTitle("OMFG!");
+            showDialog(WIN_DIALOG);
         }
     }
 
