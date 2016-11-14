@@ -5,6 +5,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -64,6 +66,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         vectors.add(new Vector(C1_1,C2_2,C3_3));
         vectors.add(new Vector(C3_1,C2_2,C1_3));
 
+        registerForContextMenu(B1_1);
         B1_1.setOnClickListener(this);
         B1_2.setOnClickListener(this);
         B1_3.setOnClickListener(this);
@@ -136,6 +139,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.add(1,1,1,"Reset");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId()==1) reset();
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
     protected Dialog onCreateDialog(int id) {
         if (id == WIN_DIALOG) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
@@ -189,9 +203,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
 
         for (Vector vector : activeVectors){
-            if (vector.toLose()>1 || vector.toWin()>1){
+            if (vector.toLose()>1){
                 vector.setEmpty();
                 return;
+            }
+            else {
+                if (vector.toWin()>1){
+                    vector.setEmpty();
+                    return;
+                }
             }
         }
 
@@ -204,21 +224,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void check(){
-        boolean flag = true;
-        for (Vector vector : vectors) {
-            if (!vector.isFull()) {
-                flag = false;
-            }
-        }
         for (Vector vector : vectors){
             if (vector.isWin()) {
                 showDialog(WIN_DIALOG);
-                break;
+                return;
             }
-        }
-        if (flag){
-            setTitle("OMFG!");
-            showDialog(WIN_DIALOG);
         }
     }
 
