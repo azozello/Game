@@ -153,13 +153,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected Dialog onCreateDialog(int id) {
         if (id == WIN_DIALOG) {
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
-            adb.setTitle(GAME_OVER);
+            adb.setTitle("Upss..");
             adb.setMessage("Start new game?");
             adb.setPositiveButton(R.string.N_G,dialogOnClick);
             adb.setNegativeButton(R.string.C,dialogOnClick);
             return adb.create();
         }
         return super.onCreateDialog(id);
+    }
+
+    @Override
+    protected void onPrepareDialog(int id, Dialog dialog) {
+        super.onPrepareDialog(id, dialog);
+        if (id == WIN_DIALOG){
+            dialog.setTitle(GAME_OVER);
+        }
     }
 
     DialogInterface.OnClickListener dialogOnClick = new DialogInterface.OnClickListener() {
@@ -175,9 +183,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     };
 
     private void upDate(){
-        check();
-        step();
-        check();
+        if (check()) return;
+        else {
+            step();
+            check();
+            isFulls();
+        }
     }
 
     private void step(){
@@ -223,11 +234,23 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    public void check(){
+    public boolean check(){
         for (Vector vector : vectors){
             if (vector.isWin()) {
                 showDialog(WIN_DIALOG);
-                return;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void isFulls(){
+        if (vectors.get(3).isFull()){
+            if (vectors.get(4).isFull()){
+                if (vectors.get(5).isFull()){
+                    setTitle("Upss...");
+                    showDialog(WIN_DIALOG);
+                }
             }
         }
     }
@@ -237,6 +260,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void reset(){
+        setTitle("");
         C1_1.setValue(0);
         C1_2.setValue(0);
         C1_3.setValue(0);
@@ -248,12 +272,3 @@ public class MainActivity extends Activity implements View.OnClickListener {
         C3_3.setValue(0);
     }
 }
-/*
-                    StringBuilder stringBuilder = new StringBuilder();
-                    stringBuilder.append("C3_3 contained in: ");
-                    for (Vector vector : vectors){
-                        if (vector.contains(C3_3)) stringBuilder.append(vector.toString()+" ");
-                    }
-                    Toast.makeText(this,stringBuilder.toString(),Toast.LENGTH_LONG).show();
-                    upDate();
- */
