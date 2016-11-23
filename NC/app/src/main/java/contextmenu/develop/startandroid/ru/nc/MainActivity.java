@@ -9,12 +9,12 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
+    static boolean Choose, GameChoose;
     final int WIN_DIALOG = 7;
     public static String GAME_OVER = "";
 
@@ -26,6 +26,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        GameChoose = true;
+        Choose = false;
 
         B1_1 = (Button) findViewById(R.id.button1);
         B1_2 = (Button) findViewById(R.id.button2);
@@ -83,57 +86,138 @@ public class MainActivity extends Activity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.button1:
                 if (C1_1.getValue()==0) {
-                    C1_1.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C1_1.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C1_1.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button2:
                 if (C1_2.getValue()==0) {
-                    C1_2.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C1_2.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C1_2.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button3:
                 if (C1_3.getValue()==0) {
-                    C1_3.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C1_3.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C1_3.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button4:
                 if (C2_1.getValue()==0) {
-                    C2_1.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C2_1.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C2_1.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button5:
                 if (C2_2.getValue()==0) {
-                    C2_2.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C2_2.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C2_2.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button6:
                 if (C2_3.getValue()==0) {
-                    C2_3.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C2_3.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C2_3.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button7:
                 if (C3_1.getValue()==0) {
-                    C3_1.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C3_1.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C3_1.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button8:
                 if (C3_2.getValue()==0) {
-                    C3_2.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C3_2.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C3_2.setValue(1);
+                    }
                 }
+                upDate();
                 break;
             case R.id.button9:
                 if (C3_3.getValue()==0) {
-                    C3_3.setValue(1);
-                    upDate();
+                    if (Choose){
+                        C3_3.setValue(GameChoose?1:2);
+                        if (GameChoose){
+                            GameChoose = false;
+                        }else {
+                            GameChoose = true;
+                        }
+                    }else {
+                        C3_3.setValue(1);
+                    }
                 }
+                upDate();
                 break;
         }
     }
@@ -141,11 +225,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         menu.add(1,1,1,"Reset");
+        menu.add(2,2,2,"Choose");
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getItemId()==1) reset();
+        if (item.getItemId()==2) {
+            if (Choose) Choose = false;
+            else Choose = true;
+        }
         return super.onContextItemSelected(item);
     }
 
@@ -183,11 +272,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
     };
 
     private void upDate(){
-        if (check()) return;
-        else {
-            step();
-            check();
-            isFulls();
+        if (Choose){
+            if (check()) return;
+            else {
+                check();
+                isFulls();
+            }
+        }else {
+            if (check()) return;
+            else {
+                step();
+                check();
+                isFulls();
+            }
         }
     }
 
@@ -260,6 +357,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public void reset(){
+        GameChoose = true;
         setTitle("");
         C1_1.setValue(0);
         C1_2.setValue(0);

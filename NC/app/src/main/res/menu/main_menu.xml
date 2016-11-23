@@ -8,4 +8,9 @@
         android:orderInCategory="100"
         android:title="Reset"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_choose"
+        android:orderInCategory="100"
+        android:title="Choose"
+        app:showAsAction="never"/>
 </menu>
